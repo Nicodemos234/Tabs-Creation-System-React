@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12);
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -19,13 +19,12 @@ const Title = styled.h2`
   margin: 0;
 `;
 
-const Card = ({
-  title,
-  children,
-}: {
+interface CardProps {
   title: string;
   children: React.ReactNode;
-}) => {
+}
+
+const Card = ({ title, children }: CardProps) => {
   return (
     <Wrapper>
       <Title>{title}</Title>

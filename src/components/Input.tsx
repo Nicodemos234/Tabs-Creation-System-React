@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Content = styled.div`
   display: flex;
 `;
 
 const Title = styled.p`
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -30,10 +30,11 @@ const StyledTextArea = styled.textarea`
   border-radius: 4px;
   padding: 6px 12px;
   margin: 4px 0;
+  resize: none;
 `;
 
 const Error = styled.p`
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: italic;
   font-weight: 300;
   font-size: 12px;
@@ -42,25 +43,18 @@ const Error = styled.p`
   margin: 0 0 0 85px;
 `;
 
-const Input = ({
-  title,
-  type = "input",
-  error,
-  ...props
-}: {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   title: string;
-  type?: "input" | "textarea";
+  type?: 'input' | 'textarea';
   error?: string;
-} & React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>) => {
+}
+
+const Input = ({ title, type = 'input', error, ...props }: InputProps) => {
   return (
     <>
       <Content>
         <Title>{title}</Title>
-        {type === "input" ? (
-          <StyledInput {...props} />
-        ) : (
-          <StyledTextArea {...props} />
-        )}
+        {type === 'input' ? <StyledInput {...props} /> : <StyledTextArea {...props} />}
       </Content>
       <Error>{error}</Error>
     </>
