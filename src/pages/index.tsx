@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Footer, Input } from '../components';
@@ -96,6 +97,11 @@ const Home: NextPage = () => {
 
   return (
     <Wrapper>
+      <Head>
+        <title>Tabs Creating</title>
+        <meta name="description" content="App para criação de abas em uma janela com React" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Card title="Tabs">
         <Input
           title="Núm.tabs"
