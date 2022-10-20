@@ -7,6 +7,7 @@ import { Card, Footer, Input } from '../components';
 const Wrapper = styled.div`
   display: flex;
   flex-grow: 1;
+  max-height: 95vh;
 `;
 
 const Divider = styled.div`

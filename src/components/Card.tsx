@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   flex-flow: column;
   padding: 24px;
   margin: 21px;
+  overflow-y: scroll;
 `;
 
 const Title = styled.h2`
