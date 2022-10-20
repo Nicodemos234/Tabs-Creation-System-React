@@ -1,7 +1,7 @@
-import type { NextPage } from "next";
-import React from "react";
-import styled from "styled-components";
-import { Card, Input } from "../components";
+import type { NextPage } from 'next';
+import React from 'react';
+import styled from 'styled-components';
+import { Card, Footer, Input } from '../components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const Button = styled.button`
   height: 36px;
   background: #7b61ff;
   border-radius: 4px;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -51,13 +51,13 @@ const Tab = styled.button<{ active?: boolean }>`
   padding: 12px 16px;
   height: 44px;
   background: #ffffff;
-  ${({ active }) => (active ? "box-shadow: inset 0px -3px 0px #5A3FE0;" : "")}
+  ${({ active }) => (active ? 'box-shadow: inset 0px -3px 0px #5A3FE0;' : '')}
   border: 0;
   cursor: pointer;
 `;
 
 const Content = styled.p`
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -73,16 +73,14 @@ type TabType = {
 const Home: NextPage = () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [totalTabs, setTotalTabs] = React.useState(1);
-  const [creatingTabs, setCreatingTabs] = React.useState<TabType[]>([
-    { title: "", content: "" },
-  ]);
+  const [creatingTabs, setCreatingTabs] = React.useState<TabType[]>([{ title: '', content: '' }]);
   const [createdTabs, setCreatedTabs] = React.useState<TabType[]>([]);
   const [hasSaved, setHasSaved] = React.useState(false);
 
   React.useEffect(() => {
     const creationArray: TabType[] = [];
     for (let i = 0; i < totalTabs; i++) {
-      creationArray.push({ title: "", content: "" });
+      creationArray.push({ title: '', content: '' });
     }
     setCreatingTabs(creationArray);
   }, [totalTabs]);
@@ -90,7 +88,7 @@ const Home: NextPage = () => {
   const handleSave = () => {
     setHasSaved(true);
     let allFilled = true;
-    creatingTabs.forEach((item) => {
+    creatingTabs.forEach(item => {
       if (!item.content || !item.title) allFilled = false;
     });
     if (allFilled) setCreatedTabs(creatingTabs);
@@ -102,8 +100,8 @@ const Home: NextPage = () => {
         <Input
           title="Núm.tabs"
           value={totalTabs || 0}
-          onChange={(e) => {
-            setHasSaved(false)
+          onChange={e => {
+            setHasSaved(false);
             setTotalTabs(parseInt(e.target.value));
           }}
           error={!totalTabs ? 'Deve haver pelo menos uma aba' : undefined}
@@ -113,32 +111,24 @@ const Home: NextPage = () => {
           <div key={i}>
             <Input
               title="Título"
-              value={creatingTabs?.[i] ? creatingTabs?.[i].title : ""}
-              onChange={(e) => {
+              value={creatingTabs?.[i] ? creatingTabs?.[i].title : ''}
+              onChange={e => {
                 const auxArray = [...(creatingTabs || [])];
                 auxArray[i].title = e.target.value;
                 setCreatingTabs(auxArray);
               }}
-              error={
-                hasSaved && creatingTabs?.[i] && !creatingTabs?.[i].title
-                  ? "É necessário informar o título da aba"
-                  : undefined
-              }
+              error={hasSaved && creatingTabs?.[i] && !creatingTabs?.[i].title ? 'É necessário informar o título da aba' : undefined}
             />
             <Input
               title="Conteúdo"
-              value={creatingTabs?.[i] ? creatingTabs?.[i].content : ""}
-              onChange={(e) => {
+              value={creatingTabs?.[i] ? creatingTabs?.[i].content : ''}
+              onChange={e => {
                 const auxArray = [...(creatingTabs || [])];
                 auxArray[i].content = e.target.value;
                 setCreatingTabs(auxArray);
               }}
-              type='textarea'
-              error={
-                hasSaved && creatingTabs?.[i] && !creatingTabs?.[i].content
-                  ? "A necessário informar o conteúdo da aba."
-                  : undefined
-              }
+              type="textarea"
+              error={hasSaved && creatingTabs?.[i] && !creatingTabs?.[i].content ? 'A necessário informar o conteúdo da aba.' : undefined}
             />
           </div>
         ))}
@@ -147,19 +137,14 @@ const Home: NextPage = () => {
       <Card title="Conteúdo">
         <TabRow>
           {createdTabs?.map((tab, i) => (
-            <Tab
-              key={i}
-              active={i === selectedTab}
-              onClick={() => setSelectedTab(i)}
-            >
+            <Tab key={i} active={i === selectedTab} onClick={() => setSelectedTab(i)}>
               {tab.title}
             </Tab>
           ))}
         </TabRow>
-        {createdTabs?.[selectedTab] && (
-          <Content>{createdTabs?.[selectedTab].content}</Content>
-        )}
+        {createdTabs?.[selectedTab] && <Content>{createdTabs?.[selectedTab].content}</Content>}
       </Card>
+      <Footer />
     </Wrapper>
   );
 };
